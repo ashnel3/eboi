@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg viewBox="0 0 60 60" id="icodi" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+<rect x="0" y="0" width="60" height="60" fill="#fff"/>
+<defs>
+<clipPath id="icodi-874535">
+<rect width="60" height="60"/>
+</clipPath>
+</defs>
+<g clip-path="url(#icodi-874535)">
+<rect x="0" y="0" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="50" y="0" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="0" y="20" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="50" y="20" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="10" y="20" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="40" y="20" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="10" y="30" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="40" y="30" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="20" y="30" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="30" y="30" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="0" y="40" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="50" y="40" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="10" y="40" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+<rect x="40" y="40" width="10" height="10" fill="#70bf86" style="stroke:#70bf86; stroke-width:0.1"/>
+</g>
+
+</svg>

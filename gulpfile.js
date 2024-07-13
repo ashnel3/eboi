@@ -50,7 +50,9 @@ gulp.task('build:typescript', () => {
 })
 
 gulp.task('build:copy', () => {
-  return gulp.src(['./config/**/*'], { cwd: './src', cwdbase: true }).pipe(gulp.dest('./dist'))
+  return gulp
+    .src(['assets/**/*', 'config/**/*'], { cwd: './src', cwdbase: true })
+    .pipe(gulp.dest('./dist'))
 })
 
 gulp.task('start:run', (cb) => {
