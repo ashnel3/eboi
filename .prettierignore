@@ -1,0 +1,7 @@
+node_modules/
+dist/
+
+# Lock Files
+package-lock.json
+pnpm-lock.yaml
+*.lock
