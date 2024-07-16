@@ -10,5 +10,5 @@ export default abstract class EboiEvent {
   }
 
   abstract readonly name: keyof ClientEvents
-  abstract run(): Promise<void>
+  abstract run(...args: any[]): Promise<void>
 }

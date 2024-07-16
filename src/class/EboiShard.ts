@@ -4,13 +4,14 @@ import load from '../util/loader.js'
 import { join } from 'path'
 
 import type { ClientEvents } from 'discord.js'
+import type EboiCommand from './EboiCommand.js'
 import type EboiEvent from './EboiEvent.js'
 import { type EboiManagerMessageMap, EboiManagerMessageType } from './EboiManager.js'
 import type { EboiEnvironment, EboiEnvironmentAuth } from '../types'
 
 export default class EboiShard {
   readonly _events = new Collection<keyof ClientEvents, EboiEvent>()
-  readonly _command = new Collection()
+  readonly _command = new Collection<string, EboiCommand>()
   readonly client = new Client({
     intents: [],
     partials: [],

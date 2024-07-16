@@ -47,9 +47,9 @@ export const load = async (shard: EboiShard, directories: string[]) => {
     }
   }
   return await PromisePool.for(
-    (await Promise.all(directories.map(async (p) => await readdirURL(p)))).flatMap((url) =>
-      url.toString(),
-    ),
+    (await Promise.all(directories.map(async (p) => await readdirURL(p))))
+      .flat()
+      .map((u) => u.toString()),
   )
     .withConcurrency(8)
     .process(async (url): Promise<EboiComponentResult> => {

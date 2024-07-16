@@ -13,7 +13,7 @@ export default class EboiReadyEvent extends EboiEvent {
     const user = this.shard.client.user!
     this.logger.info({
       _ids: this.shard.ids,
-      message: `shard logged-in as '${user.username}#${user.id}'!`,
+      message: `shard logged-in as '${user.toString()}'!`,
     })
     if (typeof presence !== 'undefined') {
       await user.setPresence(presence)
