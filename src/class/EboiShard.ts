@@ -1,10 +1,16 @@
-import { Client, Routes } from 'discord.js'
+import { Client, Collection, Routes } from 'discord.js'
 import logger from '../util/logger.js'
+import load from '../util/loader.js'
+import { join } from 'path'
 
-import { type EboiManagerMessageMap, EboiManagerMessageType } from './EboiManager'
-import { EboiEnvironment, EboiEnvironmentAuth } from 'src/types'
+import type { ClientEvents } from 'discord.js'
+import type EboiEvent from './EboiEvent.js'
+import { type EboiManagerMessageMap, EboiManagerMessageType } from './EboiManager.js'
+import type { EboiEnvironment, EboiEnvironmentAuth } from '../types'
 
 export default class EboiShard {
+  readonly _events = new Collection<keyof ClientEvents, EboiEvent>()
+  readonly _command = new Collection()
   readonly client = new Client({
     intents: [],
     partials: [],
@@ -48,8 +54,23 @@ export default class EboiShard {
 
   async setup(): Promise<this> {
     this.logger.info({
-      ids: this.ids,
-      message: 'Starting shard setup',
+      _ids: this.ids,
+      message: 'shard initializing',
+    })
+    const { results, errors } = await load(this, [
+      join(import.meta.dirname, './events'),
+      join(import.meta.dirname, './commands'),
+    ])
+    if (errors.length > 0) {
+      this.logger.error({
+        _ids: this.ids,
+        message: `failed loading ${errors.length} component(s)`,
+        meta: errors.map((err) => err.message),
+      })
+    }
+    this.logger.info({
+      _ids: this.ids,
+      message: `finished loading ${results.length} component(s)`,
     })
     return this
   }

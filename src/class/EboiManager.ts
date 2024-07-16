@@ -75,8 +75,8 @@ export default class EboiManager {
 
   async setup(): Promise<void> {
     this.logger.info({
-      ids: ['main'],
-      message: `Starting Eboi v${this.env.meta.version}`,
+      _ids: ['main'],
+      message: `starting eboi v${this.env.meta.version}`,
     })
     await this.shards.spawn({
       amount: 2, // TEMP
