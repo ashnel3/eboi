@@ -1,3 +1,7 @@
+// main thread entrypoint
+
 import EboiManager from './class/EboiManager.js'
 
-export const manager = new EboiManager()
+export const manager = await new EboiManager(
+  await EboiManager.createEnvironment(import.meta.dirname),
+).setup()

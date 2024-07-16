@@ -36,10 +36,10 @@ const rm = async (paths) => {
 
 gulp.task('build:typescript', () => {
   const project = ts.createProject('./tsconfig.json', {
-    module: 'NodeNext',
-    moduleResolution: 'NodeNext',
+    module: 'ESNext',
+    moduleResolution: 'Node',
     stripInternal: MODE === 'production',
-    target: 'EsNext',
+    target: 'ESNext',
   })
   return project
     .src()
@@ -84,17 +84,7 @@ gulp.task('start:run', (cb) => {
 
 // --- entrypoints ---
 
-gulp.task('start', () => {
-  return gulp.watch(
-    ['./src/**/*'],
-    {
-      ignored: ['./src/test/**/*', './src/types/**/*'],
-      ignoreInitial: false,
-      delay: 1000,
-    },
-    gulp.series('start:run'),
-  )
-})
+gulp.task('start', gulp.series('start:run'))
 
 gulp.task('clean', async () => await rm(['./dist']))
 
