@@ -37,9 +37,9 @@ export default class EboiManager {
         EBAY_APPLICATION_ID: assertEnv('EBAY_APPLICATION_ID'),
         EBAY_CLIENT_SECRET: assertEnv('EBAY_CLIENT_SECRET'),
         DISCORD_GUILD_ID,
-        DISCORD_GENERATE_INVITE: DISCORD_GENERATE_INVITE === 'true',
         DISCORD_OWNER_ID,
       },
+      invite: DISCORD_GENERATE_INVITE === 'true',
       options: await json.read(join(root, 'config/options.json'), {}),
       meta: await json.read(join(root, '../package.json'), { name: 'eboi', version: '0.0.0' }),
       mode,
@@ -56,9 +56,11 @@ export default class EboiManager {
             'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));',
           ]
         : [],
+      respawn: env.mode == 'production',
       silent: env.mode === 'production',
       token: env.auth.DISCORD_TOKEN,
     })
+    let initialRegister = false
     this.shards.on('shardCreate', (shard) => {
       shard
         .on('error', console.error)
@@ -66,7 +68,7 @@ export default class EboiManager {
         .on('spawn', async () => {
           await shard.send({
             env: this.env,
-            register: false,
+            register: !initialRegister ? (initialRegister = true) : false,
             type: EboiManagerMessageType.Spawn,
           } satisfies EboiManagerMessageMap[EboiManagerMessageType.Spawn])
         })
@@ -78,6 +80,15 @@ export default class EboiManager {
       _ids: ['main'],
       message: `starting eboi v${this.env.meta.version}`,
     })
+    if (this.env.invite) {
+      this.logger.info({
+        _ids: ['main'],
+        message: 'created bot invite url',
+        meta: {
+          url: `https://discord.com/oauth2/authorize?client_id=${this.env.auth.DISCORD_APPLICATION_ID}&permissions=0&scope=bot`,
+        },
+      })
+    }
     await this.shards.spawn({
       amount: 2, // TEMP
       timeout: 10e3,

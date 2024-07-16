@@ -13,7 +13,6 @@ export interface EboiEnvironmentAuth {
   DISCORD_TOKEN: string
   DISCORD_OWNER_ID?: string
   DISCORD_GUILD_ID?: string
-  DISCORD_GENERATE_INVITE: boolean
   EBAY_APPLICATION_ID: string
   EBAY_CLIENT_SECRET: string
 }
@@ -24,5 +23,6 @@ export interface EboiEnvironment {
   mode: EboiEnvironmentMode
   options: EboiOptions
   root: string
+  invite: boolean
   ts: boolean
 }

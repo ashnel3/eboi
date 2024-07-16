@@ -37,13 +37,19 @@ export default class EboiShard {
   }
 
   private async register(auth: EboiEnvironmentAuth): Promise<void> {
+    const body = this._command.map((c) => c.slash.toJSON())
     if (typeof auth.DISCORD_GUILD_ID === 'string' && auth.DISCORD_GUILD_ID !== '') {
       await this.client.rest.put(
         Routes.applicationGuildCommands(auth.DISCORD_APPLICATION_ID, auth.DISCORD_GUILD_ID),
+        { body },
       )
     } else {
-      await this.client.rest.put(Routes.applicationCommands(auth.DISCORD_APPLICATION_ID))
+      await this.client.rest.put(Routes.applicationCommands(auth.DISCORD_APPLICATION_ID), { body })
     }
+    this.logger.info({
+      _ids: this.ids,
+      message: `shard registered ${body.length} command(s)`,
+    })
   }
 
   private async login(env: EboiEnvironment, register: boolean): Promise<void> {
@@ -56,7 +62,7 @@ export default class EboiShard {
   async setup(): Promise<this> {
     this.logger.info({
       _ids: this.ids,
-      message: 'shard initializing',
+      message: 'shard initializing...',
     })
     const { results, errors } = await load(this, [
       join(import.meta.dirname, './events'),

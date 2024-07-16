@@ -6,6 +6,7 @@ import type EboiShard from '../EboiShard.js'
 export default class EboiPingCommand extends EboiCommand {
   constructor(shard: EboiShard) {
     super(shard, 'ping')
+    this.slash.setDescription('show bot latency')
   }
 
   async run(interaction: CommandInteraction): Promise<void> {
