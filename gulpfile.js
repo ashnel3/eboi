@@ -139,6 +139,25 @@ gulp.task('dev', () => {
     .on('change', run)
 })
 
-gulp.task('clean', async () => await rm(['./dist']))
+gulp.task('clean:build', async () => await rm(['./dist']))
 
 gulp.task('build', gulp.series('build:prisma', gulp.parallel('build:copy', 'build:typescript')))
+
+gulp.task('unregister', async () => {
+  const { REST, Routes } = await import('discord.js')
+  const { DISCORD_APPLICATION_ID, DISCORD_GUILD_ID, DISCORD_TOKEN } =
+    (await import('dotenv')).config().parsed ?? {}
+  const rest = new REST().setToken(DISCORD_TOKEN)
+  await Promise.all([
+    async () => {
+      if (typeof DISCORD_GUILD_ID === 'string' && DISCORD_GUILD_ID !== '') {
+        await rest.put(Routes.applicationGuildCommands(DISCORD_APPLICATION_ID, DISCORD_GUILD_ID), {
+          body: [],
+        })
+      }
+    },
+    async () => {
+      await rest.put(Routes.applicationCommands(DISCORD_APPLICATION_ID), { body: [] })
+    },
+  ])
+})
