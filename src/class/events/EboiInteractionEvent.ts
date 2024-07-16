@@ -23,7 +23,7 @@ export default class EboiInteractionEvent extends EboiEvent {
       } else {
         await interaction.reply({
           ephemeral: true,
-          content: `failed to find command '${interaction.commandName}'!`
+          content: `failed to find command '${interaction.commandName}'!`,
         })
       }
     } catch (error) {
