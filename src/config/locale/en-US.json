@@ -1,0 +1,10 @@
+{
+  "command": {
+    "name": {
+      "ping": "ping"
+    },
+    "description": {
+      "ping": "show bot latency to discord"
+    }
+  }
+}

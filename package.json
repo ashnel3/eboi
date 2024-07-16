@@ -45,6 +45,9 @@
     "@prisma/client": "^5.16.2",
     "@supercharge/promise-pool": "^3.2.0",
     "discord.js": "^14.15.3",
+    "i18next": "^23.12.1",
+    "i18next-fs-backend": "^2.3.1",
+    "i18next-resources-to-backend": "^1.2.1",
     "winston": "^3.13.1"
   },
   "devDependencies": {

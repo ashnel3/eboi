@@ -53,7 +53,9 @@ export default class EboiShard {
   }
 
   private async login(env: EboiEnvironment, register: boolean): Promise<void> {
+    // login to discord
     await this.client.login(env.auth.DISCORD_TOKEN)
+    // register slash commands
     if (register) {
       await this.register(env.auth)
     }
@@ -64,6 +66,7 @@ export default class EboiShard {
       _ids: this.ids,
       message: 'shard initializing...',
     })
+    // load components
     const { results, errors } = await load(this, [
       join(import.meta.dirname, './events'),
       join(import.meta.dirname, './commands'),
