@@ -139,7 +139,7 @@ gulp.task('dev', () => {
     .on('change', run)
 })
 
-gulp.task('clean:build', async () => await rm(['./dist']))
+gulp.task('clean', async () => await rm(['./dist']))
 
 gulp.task('build', gulp.series('build:prisma', gulp.parallel('build:copy', 'build:typescript')))
 
