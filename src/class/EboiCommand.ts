@@ -1,5 +1,6 @@
-import { SlashCommandBuilder } from 'discord.js'
+import { PermissionFlagsBits, SlashCommandBuilder } from 'discord.js'
 import i18next from 'i18next'
+import { second } from '../util/time.js'
 
 import type { Logger } from 'winston'
 import type { CommandInteraction, Permissions } from 'discord.js'
@@ -12,7 +13,8 @@ export default abstract class EboiCommand {
   constructor(
     readonly shard: EboiShard,
     readonly name: string,
-    readonly permissions: Permissions | bigint | number = 0,
+    permissions: Permissions | bigint | number = PermissionFlagsBits.UseApplicationCommands,
+    readonly timeout: number = second * 5,
   ) {
     this.slash = new SlashCommandBuilder()
       .setName(name)
