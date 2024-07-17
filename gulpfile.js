@@ -124,7 +124,7 @@ gulp.task('build:typescript', () => {
 
 // --- entrypoints ---
 
-gulp.task('start', run)
+gulp.task('start', gulp.series('build:prisma', run))
 
 gulp.task('dev', () => {
   return gulp
