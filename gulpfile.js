@@ -78,7 +78,7 @@ const run = async () => {
       'data:text/javascript,import { register } from "node:module"; import { pathToFileURL } from "node:url"; register("ts-node/esm", pathToFileURL("./"));',
       '-r',
       'dotenv/config',
-      path.resolve('./src/index.ts'),
+      path.resolve('./src/bin/index.ts'),
     ],
     {
       env: {

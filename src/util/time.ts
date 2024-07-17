@@ -1,17 +1,22 @@
-export const second = 1000
-export const minute = 60e3
-export const hour = 3.6e6
-export const day = 8.64e7
+export const SECOND = 1000
+export const MINUTE = 60e3
+export const HOUR = 3.6e6
+export const DAY = 8.64e7
 
-export const units = {
-  s: second,
-  m: minute,
-  h: hour,
-  d: day,
+/**
+ * timeunit table
+ * @private
+ * @internal
+ */
+const units = {
+  s: SECOND,
+  m: MINUTE,
+  h: HOUR,
+  d: DAY,
 }
 
 /**
- * parse timeunit
+ * parse timeunit string
  * @example timeunit('1.2d') // -> 103680000
  * @param value  timeunit string
  * @returns      milliseconds integer
@@ -25,3 +30,35 @@ export const timeunit = (value: string): number => {
     throw new Error(`invalid time '${value}'!`)
   }
 }
+
+/** Simple timeout class */
+export class EboiTimeout {
+  constructor(public date: Date) {}
+
+  /**
+   * create timeout from ms
+   * @param length timeout length
+   * @returns      timeout
+   */
+  static ms(length: number): EboiTimeout {
+    return new this(new Date(Date.now() + length))
+  }
+
+  /**
+   * has timeout passed
+   * @returns timeout is passed
+   */
+  passed(): boolean {
+    return this.date.getTime() < Date.now()
+  }
+
+  /**
+   * timeout remains
+   * @returns ms remaining
+   */
+  remaining(): number {
+    return Math.max(this.date.getTime() - Date.now(), 0)
+  }
+}
+
+export default EboiTimeout

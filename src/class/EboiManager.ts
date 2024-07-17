@@ -26,10 +26,11 @@ export default class EboiManager {
   readonly shards: ShardingManager
   readonly logger = logger
 
-  static async createEnvironment(root: string): Promise<EboiEnvironment> {
+  static async createEnvironment(): Promise<EboiEnvironment> {
     const { DISCORD_GUILD_ID, DISCORD_GENERATE_INVITE, DISCORD_OWNER_ID, NODE_ENV, TS_NODE } =
       process.env
     const mode: EboiEnvironmentMode = NODE_ENV === 'development' ? 'development' : 'production'
+    const root = join(import.meta.dirname, '../')
     return {
       auth: {
         DISCORD_APPLICATION_ID: assertEnv('DISCORD_APPLICATION_ID'),
@@ -49,7 +50,7 @@ export default class EboiManager {
   }
 
   constructor(readonly env: EboiEnvironment) {
-    this.shards = new ShardingManager(join(env.root, env.ts ? 'shard.ts' : 'shard.js'), {
+    this.shards = new ShardingManager(join(env.root, 'bin', env.ts ? 'shard.ts' : 'shard.js'), {
       execArgv: env.ts
         ? [
             '--import',

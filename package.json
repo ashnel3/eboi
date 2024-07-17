@@ -2,7 +2,7 @@
   "name": "eboi",
   "version": "0.1.0",
   "description": "Eboi Discord Ebay integration bot",
-  "main": "dist/index.js",
+  "main": "dist/bin/index.js",
   "type": "module",
   "scripts": {
     "start": "gulp start",
